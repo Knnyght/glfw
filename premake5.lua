@@ -4,8 +4,11 @@ project "GLFW"
 	staticruntime "off"
 	warnings "off"
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	architecture "x86_64"
+
+
+	targetdir "Build/%{cfg.buildcfg}/%{prj.name}"
+		objdir "Intermediates/%{cfg.buildcfg}/%{prj.name}"
 
 	files
 	{
@@ -101,12 +104,6 @@ project "GLFW"
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
-
-	filter { "system:windows", "configurations:Debug-AS" }	
-		runtime "Debug"
-		symbols "on"
-		sanitize { "Address" }
-		flags { "NoRuntimeChecks", "NoIncrementalLink" }
 
 	filter "configurations:Release"
 		runtime "Release"
